@@ -39,54 +39,48 @@
 
 
 
- <c:when test="${empty emprunts}">
-        <p>pas de emprunts</p>
+ <c:when test="${empty users}">
+        <p>pas de users</p>
     </c:when>
 <c:otherwise>
   </div>
-               <h5>nombre de emprunts : ${emprunts.size() }   </h6>
+               <h5>nombre de users : ${emprunts.size() }   </h6>
          </div>
         
      <div style="overflow-x:auto;">
               <table>
                 <tr>
                   <th>Id</th>
-                  <th>User</th>
-                  <th>Nom Livre</th>
-                  <th>ISBN</th>
-                
-    
-                  <th>Date emprunts</th>
-                  <th >Date retour Prevue</th>
+                  <th>Nom Complet </th>
+                  <th>Email</th>
+               
                   <th>Action</th>
                 </tr>
                 
-                 <c:forEach items="${emprunts}" var="emprunt">
+                 <c:forEach items="${users}" var="user">
                                     <tr>
-                                        <td>${emprunt.id}</td>
-                                        <td>${emprunt.user.nom}</td>
-                                         <td>${emprunt.exemplaire.livre.titre}</td>
-                                        <td>${emprunt.exemplaire.ISBN}</td>
-
-                                        <td>${emprunt.date_Emprunt}</td>
-                      
-                                        <td>${emprunt.date_retour_Prevue}</td>
-                                    <!--  <td>   ${emprunt.dateRetourReelle }</td> -->  
+                                        <td>${user.id}</td>
+                                        <td>${user.nom} ${user.prenom }</td>
+                                         <td>${user.email}</td>
+                                      
        
                                    <td style="display:flex; align-items:center; gap:10px">
-                                        <form action="" method="get">
-                                        <input  type="hidden" name="id" value="${emprunt.id}">
-                                        <button  style="color:green">Accepter</button>
-                                        </form>
-                                         <form action="" method="get">
-                                          <input  type="hidden" name="id" value="${emprunt.id}">
-                                        <button style="color:red">Refuser</button>
-                                        </form>
+                                    
+                                     <form action="" method="post">
+                    <input type="hidden" name="id" value="${user.id}">
+                   <button type="submit">
+                     <i class="fa-solid fa-trash"></i>
+                   </button>
+                    </form>
                                         </td>
                                     </tr>
                                 </c:forEach>
               </table>
             </div>
+            
+            <!-- SELECT  nom, COUNT(emprunt.id_user) FROM `user` left join emprunt on user.id=emprunt.id_user
+where emprunt.Date_Retour_Réelle IS NULL and  user.role='user'
+GROUP by (nom) -->
 </c:otherwise>
 </c:choose>
 

@@ -85,4 +85,15 @@
     <url-pattern>/ServletEmprunt</url-pattern>
     <url-pattern>/emprunts</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletUser</display-name>
+    <servlet-name>ServletUser</servlet-name>
+    <servlet-class>web.ServletUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletUser</servlet-name>
+    <url-pattern>/ServletUser</url-pattern>
+      <url-pattern>/users</url-pattern>
+  </servlet-mapping>
 </web-app>

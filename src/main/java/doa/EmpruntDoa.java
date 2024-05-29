@@ -25,7 +25,7 @@ public class EmpruntDoa {
 	    try {
 	        Utilitaire utilitaire = new Utilitaire();
 	        connection = utilitaire.getConnection();
-	        String query = "SELECT emprunt.*, exemplaire.id, user.nom,user.prenom, livre.titre "+ "FROM emprunt "
+	        String query = "SELECT emprunt.*, exemplaire.id,exemplaire.ISBN,user.nom,user.prenom, livre.titre "+ "FROM emprunt "
 	        		+ "INNER JOIN exemplaire ON emprunt.id_exemplaire = exemplaire.id "
 	        		+ "INNER JOIN user ON emprunt.id_user = user.id "
 	        		+ "INNER JOIN livre ON exemplaire.ISBN = livre.ISBN where Date_Retour_Réelle is null	";
@@ -45,6 +45,7 @@ public class EmpruntDoa {
 	        	
 	        	emprunt.setId(resultSet.getInt("emprunt.id"));
 	        	emprunt.setId_exemplaire(resultSet.getInt("id_exemplaire"));
+	        
 	            emprunt.setId_user(resultSet.getInt("id_user"));
 	            emprunt.setDate_Emprunt(resultSet.getDate("date_Emprunt"));
 	            emprunt.setDate_retour_Prevue(resultSet.getDate("date_detour_Prevue"));
@@ -58,7 +59,7 @@ public class EmpruntDoa {
                 
             	
 	        	Exemplaire.setLivre(livre);
-	        	
+	        	Exemplaire.setISBN(resultSet.getString("exemplaire.ISBN"));
 	        	
                 emprunt.setExemplaire(Exemplaire);
                 emprunt.setUser(user);
